@@ -6,10 +6,12 @@ import org.greenrobot.eventbus.EventBus
 import java.util.concurrent.ExecutorService
 
 
-class BaseInteractor(
+abstract class BaseInteractor<A> protected constructor(
         private val executorService: ExecutorService,
         private val mainThreadHandler: Handler,
         private val eventBus: EventBus) {
+
+    abstract fun execute(arg: A)
 
     protected fun inBackground(backgroundFun: () -> Unit) = executorService.execute(backgroundFun)
 
