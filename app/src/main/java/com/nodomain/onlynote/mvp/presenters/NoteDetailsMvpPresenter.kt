@@ -3,9 +3,10 @@ package com.nodomain.onlynote.mvp.presenters
 
 import com.nodomain.onlynote.model.Attachment
 import com.nodomain.onlynote.model.Note
+import com.nodomain.onlynote.mvp.views.NoteDetailsMvpView
 
 
-interface NoteDetailsPresenter {
+interface NoteDetailsMvpPresenter : MvpPresenter<NoteDetailsMvpView> {
 
     fun addPhoto()
 

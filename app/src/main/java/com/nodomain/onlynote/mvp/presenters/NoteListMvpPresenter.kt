@@ -2,9 +2,10 @@ package com.nodomain.onlynote.mvp.presenters
 
 
 import com.nodomain.onlynote.model.Note
+import com.nodomain.onlynote.mvp.views.NoteListMvpView
 
 
-interface NoteListPresenter {
+interface NoteListMvpPresenter : MvpPresenter<NoteListMvpView> {
 
     fun getNotes()
 
