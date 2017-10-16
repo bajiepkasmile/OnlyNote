@@ -9,4 +9,6 @@ interface NoteListMvpView : MvpView {
     fun showNotes(notes: List<Note>)
 
     fun showAddedNote(note: Note)
+
+    fun navigateToNoteDetailsView(note: Note?)
 }

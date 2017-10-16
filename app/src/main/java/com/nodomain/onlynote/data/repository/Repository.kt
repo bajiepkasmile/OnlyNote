@@ -22,15 +22,15 @@ class Repository(val localStorage: LocalStorage, val cache: Cache) {
             { addNote(note) } ,
             { addNote(note) })
 
-    fun removeNote(dataSourceType: DataSourceType, note: Note) = invokeDependingOnDataSource(
+    fun removeNotes(dataSourceType: DataSourceType, notes: List<Note>) = invokeDependingOnDataSource(
             dataSourceType,
-            { removeNote(note) },
-            { removeNote(note) })
+            { removeNotes(notes) },
+            { removeNotes(notes) })
 
-    fun updateNote(dataSourceType: DataSourceType, note: Note) = invokeDependingOnDataSource(
+    fun updateNote(dataSourceType: DataSourceType, oldNote: Note, updatedNote: Note) = invokeDependingOnDataSource(
             dataSourceType,
-            { updateNote(note) },
-            { updateNote(note) })
+            { updateNote(oldNote, updatedNote) },
+            { updateNote(oldNote, updatedNote) })
 
     private fun <R> invokeDependingOnDataSource(
             dataSourceType: DataSourceType,

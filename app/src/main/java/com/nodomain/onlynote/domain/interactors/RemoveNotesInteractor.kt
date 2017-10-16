@@ -4,24 +4,25 @@ package com.nodomain.onlynote.domain.interactors
 import android.os.Handler
 import com.nodomain.onlynote.data.datasources.DataSourceType
 import com.nodomain.onlynote.data.repository.Repository
-import com.nodomain.onlynote.domain.events.RemoveNoteSuccessEvent
 import com.nodomain.onlynote.model.Note
 import org.greenrobot.eventbus.EventBus
 import java.util.concurrent.ExecutorService
 
 
-class RemoveNoteInteractor(
+class RemoveNotesInteractor(
         executorService: ExecutorService,
         mainThreadHandler: Handler,
         eventBus: EventBus,
-        private val repository: Repository) : BaseInteractor<Note>(executorService, mainThreadHandler, eventBus) {
+        private val repository: Repository) : BaseInteractor<List<Note>>(executorService, mainThreadHandler, eventBus) {
 
-    override fun execute(note: Note) {
-        repository.removeNote(DataSourceType.CACHE, note)
+    override fun execute(args: List<Note>) {
+        repository.removeNotes(DataSourceType.CACHE, args)
 
         inBackground {
-            repository.removeNote(DataSourceType.LOCAL, note)
-            onMainThread { postStickyEvent(RemoveNoteSuccessEvent(note)) }
+            repository.removeNotes(DataSourceType.LOCAL, args)
+            onMainThread { postStickyEvent(RemoveNotesSuccessEvent(args)) }
         }
     }
 }
+
+class RemoveNotesSuccessEvent(val removedNotes: List<Note>)

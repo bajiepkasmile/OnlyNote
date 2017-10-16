@@ -11,7 +11,7 @@ abstract class BaseInteractor<A> protected constructor(
         private val mainThreadHandler: Handler,
         private val eventBus: EventBus) {
 
-    abstract fun execute(arg: A)
+    abstract fun execute(args: A)
 
     protected fun inBackground(backgroundFun: () -> Unit) = executorService.execute(backgroundFun)
 

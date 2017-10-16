@@ -9,9 +9,11 @@ interface NoteListMvpPresenter : MvpPresenter<NoteListMvpView> {
 
     fun getNotes()
 
+    fun getNoteDetails(note: Note)
+
     fun createNote()
 
-    fun deleteNote(note: Note)
+    fun removeNotes(notes: List<Note>)
 
     fun findNotes(keyStr: String)
 }

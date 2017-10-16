@@ -24,12 +24,12 @@ class Cache {
         _notes?.add(note)
     }
 
-    fun removeNote(note: Note) = _notes?.remove(note)
+    fun removeNotes(notes: List<Note>) = _notes?.removeAll(notes)
 
-    fun updateNote(note: Note) {
-        val index = _notes?.indexOf(note) ?: return
+    fun updateNote(oldNote: Note, updatedNote: Note) {
+        val index = _notes?.indexOf(oldNote) ?: return
 
         if (index != -1)
-            _notes?.set(index, note)
+            _notes?.set(index, updatedNote)
     }
 }

@@ -8,13 +8,9 @@ import com.nodomain.onlynote.mvp.views.NoteDetailsMvpView
 
 interface NoteDetailsMvpPresenter : MvpPresenter<NoteDetailsMvpView> {
 
-    fun addPhoto()
+    fun init(note: Note)
 
-    fun addRecord()
+    fun finishEditing(newText: String, newAttachments: List<Attachment>)
 
-    fun removeAttachment(attachment: Attachment)
-
-    fun createNote(title: String, text: String, attachments: List<Note>)
-
-    fun updateNote(note: Note)
+    fun saveChanges(newText: String, newAttachments: List<Attachment>)
 }
