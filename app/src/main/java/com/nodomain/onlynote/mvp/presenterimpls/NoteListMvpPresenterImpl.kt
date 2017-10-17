@@ -2,10 +2,13 @@ package com.nodomain.onlynote.mvp.presenterimpls
 
 
 import com.nodomain.onlynote.domain.interactors.GetNotesInteractor
+import com.nodomain.onlynote.domain.interactors.GetNotesSuccessEvent
 import com.nodomain.onlynote.domain.interactors.RemoveNotesInteractor
+import com.nodomain.onlynote.domain.interactors.RemoveNotesSuccessEvent
 import com.nodomain.onlynote.model.Note
 import com.nodomain.onlynote.mvp.presenters.NoteListMvpPresenter
 import com.nodomain.onlynote.mvp.views.NoteListMvpView
+import org.greenrobot.eventbus.Subscribe
 
 
 class NoteListMvpPresenterImpl(
@@ -31,6 +34,16 @@ class NoteListMvpPresenterImpl(
     }
 
     override fun findNotes(keyStr: String) {
+
+    }
+
+    @Subscribe
+    fun onGetNotesSuccess(event: GetNotesSuccessEvent) {
+
+    }
+
+    @Subscribe
+    fun onRemoveNotesSuccess(event: RemoveNotesSuccessEvent) {
 
     }
 }
