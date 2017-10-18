@@ -10,7 +10,7 @@ interface NoteDetailsMvpPresenter : MvpPresenter<NoteDetailsMvpView> {
 
     fun init(note: Note)
 
-    fun finishEditing(newText: String, newAttachments: List<Attachment>)
-
     fun saveChanges(newText: String, newAttachments: List<Attachment>)
+
+    fun cancelChanges(newText: String, newAttachments: List<Attachment>)
 }

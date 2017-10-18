@@ -6,5 +6,7 @@ import com.nodomain.onlynote.mvp.views.MvpView
 
 interface MvpPresenter<T : MvpView> {
 
-    var mvpView: T
+    fun attachMvpView(mvpView: T)
+
+    fun detachMvpView()
 }

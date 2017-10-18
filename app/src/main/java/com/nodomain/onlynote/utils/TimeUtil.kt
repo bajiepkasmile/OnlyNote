@@ -1,8 +1,11 @@
 package com.nodomain.onlynote.utils
 
 
+import java.util.Calendar
+
+
 class TimeUtil {
 
     val currentTime: Long
-        get() = TODO()
+        get() = Calendar.getInstance().timeInMillis
 }

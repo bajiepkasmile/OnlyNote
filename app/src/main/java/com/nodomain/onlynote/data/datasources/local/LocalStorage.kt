@@ -1,5 +1,6 @@
 package com.nodomain.onlynote.data.datasources.local
 
+
 import com.nodomain.onlynote.model.Note
 
 

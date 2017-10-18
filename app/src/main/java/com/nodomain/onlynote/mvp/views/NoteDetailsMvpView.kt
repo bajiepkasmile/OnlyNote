@@ -9,7 +9,9 @@ interface NoteDetailsMvpView : MvpView, NoteDetailsNavigator {
 
     fun showNote(note: Note)
 
-    fun confirmChanges()
+    fun confirmCancellation()
+
+    fun confirmDeletion()
 
     fun showProgress()
 }

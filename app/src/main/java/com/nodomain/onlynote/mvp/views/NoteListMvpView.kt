@@ -8,6 +8,4 @@ import com.nodomain.onlynote.navigation.NoteListNavigator
 interface NoteListMvpView : MvpView, NoteListNavigator {
 
     fun showNotes(notes: List<Note>)
-
-    fun showAddedNote(note: Note)
 }
