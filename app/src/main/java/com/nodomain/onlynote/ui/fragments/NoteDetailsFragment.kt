@@ -2,11 +2,13 @@ package com.nodomain.onlynote.ui.fragments
 
 
 import android.os.Bundle
-import android.support.v4.app.Fragment
+import android.view.View
 import com.nodomain.onlynote.model.Note
+import com.nodomain.onlynote.mvp.presenters.NoteDetailsMvpPresenter
+import com.nodomain.onlynote.mvp.views.NoteDetailsMvpView
 
 
-class NoteDetailsFragment : Fragment() {
+class NoteDetailsFragment : BaseMvpFragment<NoteDetailsMvpView, NoteDetailsMvpPresenter>(), NoteDetailsMvpView {
 
     companion object {
 
@@ -21,5 +23,35 @@ class NoteDetailsFragment : Fragment() {
 
             return fragment
         }
+    }
+
+    override fun onViewCreated(view: View?, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        mvpPresenter?.attachMvpView(this)
+    }
+
+    override fun onDestroyView() {
+        mvpPresenter?.detachMvpView()
+        super.onDestroyView()
+    }
+
+    override fun navigateToPreviousView() {
+        TODO("not implemented")
+    }
+
+    override fun showNote(note: Note) {
+        TODO("not implemented")
+    }
+
+    override fun confirmCancellation() {
+        TODO("not implemented")
+    }
+
+    override fun confirmDeletion() {
+        TODO("not implemented")
+    }
+
+    override fun showProgress() {
+        TODO("not implemented")
     }
 }

@@ -6,11 +6,11 @@ import com.nodomain.onlynote.mvp.views.MvpView
 import org.greenrobot.eventbus.EventBus
 
 
-abstract class BaseMvpPresenterImpl<T : MvpView>(private val eventBus: EventBus) : MvpPresenter<T> {
+abstract class BaseMvpPresenterImpl<V : MvpView>(private val eventBus: EventBus) : MvpPresenter<V> {
 
-    protected var mvpView: T? = null
+    protected var mvpView: V? = null
 
-    override fun attachMvpView(mvpView: T) {
+    override fun attachMvpView(mvpView: V) {
         this.mvpView = mvpView
         eventBus.register(this)
     }
