@@ -1,3 +1,15 @@
 <resources>
+	
 	<string name="app_name">OnlyNote</string>
+	
+	<string name="dialog_title_confirm_cancellation">Отменить изменения</string>
+	<string name="dialog_message_confirm_cancellation">Изменения не будут сохранены</string>
+	<string name="dialog_title_delete_empty_note">Запись пуста</string>
+	<string name="dialog_message_delete_empty_note">Пустая запись будет удалена</string>
+	<string name="dialog_title_delete_note">Удалить запись</string>
+	<string name="dialog_message_delete_note">Вы действительно хотите удалить запись?</string>
+	
+	<string name="ok">OK</string>
+	<string name="cancel">Отмена</string>
+	
 </resources>

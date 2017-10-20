@@ -9,20 +9,20 @@ import org.greenrobot.eventbus.EventBus
 import java.util.concurrent.ExecutorService
 
 
-class RemoveNotesInteractor(
+class RemoveNoteInteractor(
         executorService: ExecutorService,
         mainThreadHandler: Handler,
         eventBus: EventBus,
-        private val repository: Repository) : BaseInteractor<List<Note>>(executorService, mainThreadHandler, eventBus) {
+        private val repository: Repository) : BaseInteractor<Note>(executorService, mainThreadHandler, eventBus) {
 
-    override fun execute(args: List<Note>) {
+    override fun execute(args: Note) {
         repository.removeNotes(DataSourceType.CACHE, args)
 
         inBackground {
             repository.removeNotes(DataSourceType.LOCAL, args)
-            onMainThread { postStickyEvent(RemoveNotesSuccessEvent(args)) }
+            onMainThread { postStickyEvent(RemoveNoteSuccessEvent(args)) }
         }
     }
 }
 
-class RemoveNotesSuccessEvent(val removedNotes: List<Note>)
+class RemoveNoteSuccessEvent(val removedNote: Note)

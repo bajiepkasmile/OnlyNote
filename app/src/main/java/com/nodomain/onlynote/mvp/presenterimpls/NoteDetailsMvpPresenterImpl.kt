@@ -6,6 +6,7 @@ import com.nodomain.onlynote.model.Attachment
 import com.nodomain.onlynote.model.Note
 import com.nodomain.onlynote.mvp.presenters.NoteDetailsMvpPresenter
 import com.nodomain.onlynote.mvp.views.NoteDetailsMvpView
+import com.nodomain.onlynote.utils.NoteValidator
 import org.greenrobot.eventbus.EventBus
 import org.greenrobot.eventbus.Subscribe
 
@@ -13,7 +14,9 @@ import org.greenrobot.eventbus.Subscribe
 class NoteDetailsMvpPresenterImpl(
         eventBus: EventBus,
         private val addNoteInteractor: AddNoteInteractor,
-        private val updateNoteInteractor: UpdateNoteInteractor)
+        private val updateNoteInteractor: UpdateNoteInteractor,
+        private val removeNoteInteractor: RemoveNoteInteractor,
+        private val noteValidator: NoteValidator)
     : BaseMvpPresenterImpl<NoteDetailsMvpView>(eventBus), NoteDetailsMvpPresenter {
 
     private var note: Note? = null
@@ -37,18 +40,43 @@ class NoteDetailsMvpPresenterImpl(
             cancelChangesInOldNote(newText, newAttachments)
     }
 
+    override fun acceptChangesCancellation() {
+        mvpView?.navigateToPreviousView()
+    }
+
+    override fun cancelChangesCancellation() {
+        //Do nothing
+    }
+
+    override fun acceptNoteDeletion() {
+        removeNoteInteractor.execute(note!!)
+        mvpView?.showProgress()
+    }
+
+    override fun cancelNoteDeletion() {
+        //Do nothing
+    }
+
     @Subscribe
     fun onAddNoteSuccess(event: AddNoteSuccessEvent) {
         mvpView?.navigateToPreviousView()
+        removeStickyEvent(event)
     }
 
     @Subscribe
     fun onUpdateNoteSuccess(event: UpdateNoteSuccessEvent) {
         mvpView?.navigateToPreviousView()
+        removeStickyEvent(event)
+    }
+
+    @Subscribe
+    fun onRemoveNoteSuccess(event: RemoveNoteSuccessEvent) {
+        mvpView?.navigateToPreviousView()
+        removeStickyEvent(event)
     }
 
     private fun saveNewNote(newText: String, newAttachments: List<Attachment>) {
-        val dataIsEmpty = checkDataIsEmpty(newText, newAttachments)
+        val dataIsEmpty = noteValidator.checkDataIsEmpty(newText, newAttachments)
 
         if (dataIsEmpty)
             mvpView?.navigateToPreviousView()
@@ -59,8 +87,8 @@ class NoteDetailsMvpPresenterImpl(
     }
 
     private fun saveChangesInOldNote(newText: String, newAttachments: List<Attachment>) {
-        val dataIsEmpty = checkDataIsEmpty(newText, newAttachments)
-        val dataHasChanged = checkDataHasChanged(newText, newAttachments)
+        val dataIsEmpty = noteValidator.checkDataIsEmpty(newText, newAttachments)
+        val dataHasChanged = noteValidator.checkDataHasChanged(note!!, newText, newAttachments)
 
         when {
             dataIsEmpty -> mvpView?.confirmDeletion()
@@ -73,7 +101,7 @@ class NoteDetailsMvpPresenterImpl(
     }
 
     private fun cancelNewNote(newText: String, newAttachments: List<Attachment>) {
-        val dataIsEmpty = checkDataIsEmpty(newText, newAttachments)
+        val dataIsEmpty = noteValidator.checkDataIsEmpty(newText, newAttachments)
 
         if (dataIsEmpty)
             mvpView?.navigateToPreviousView()
@@ -82,26 +110,11 @@ class NoteDetailsMvpPresenterImpl(
     }
 
     private fun cancelChangesInOldNote(newText: String, newAttachments: List<Attachment>) {
-        val dataHasChanged = checkDataHasChanged(newText, newAttachments)
+        val dataHasChanged = noteValidator.checkDataHasChanged(note!!, newText, newAttachments)
 
         if (dataHasChanged)
             mvpView?.confirmCancellation()
         else
             mvpView?.navigateToPreviousView()
-    }
-
-    private fun checkDataIsEmpty(text: String, attachments: List<Attachment>): Boolean {
-        return text.isEmpty() && attachments.isEmpty()
-    }
-
-    private fun checkDataHasChanged(text: String, attachments: List<Attachment>): Boolean {
-        if (text != note?.text) return true
-        if (checkAttachmentsHaveChanged(attachments)) return true
-        return false
-    }
-
-    private fun checkAttachmentsHaveChanged(attachments: List<Attachment>): Boolean {
-        if (attachments.size != note?.attachments?.size) return true
-        return note!!.attachments.none { attachments.contains(it) }
     }
 }

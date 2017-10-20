@@ -19,4 +19,6 @@ abstract class BaseMvpPresenterImpl<V : MvpView>(private val eventBus: EventBus)
         eventBus.unregister(this)
         mvpView = null
     }
+
+    protected fun removeStickyEvent(event: Any?) = eventBus.removeStickyEvent(event)
 }

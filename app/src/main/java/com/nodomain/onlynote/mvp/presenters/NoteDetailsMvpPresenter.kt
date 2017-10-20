@@ -13,4 +13,12 @@ interface NoteDetailsMvpPresenter : MvpPresenter<NoteDetailsMvpView> {
     fun saveChanges(newText: String, newAttachments: List<Attachment>)
 
     fun cancelChanges(newText: String, newAttachments: List<Attachment>)
+
+    fun acceptChangesCancellation()
+
+    fun cancelChangesCancellation()
+
+    fun acceptNoteDeletion()
+
+    fun cancelNoteDeletion()
 }

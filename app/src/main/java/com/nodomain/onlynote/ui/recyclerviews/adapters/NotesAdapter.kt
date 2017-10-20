@@ -42,6 +42,11 @@ class NotesAdapter(private var notes: MutableList<Note>) : RecyclerView.Adapter<
         return notes.size
     }
 
+    fun setNotes(notes: MutableList<Note>) {
+        this.notes = notes
+        notifyDataSetChanged()
+    }
+
     fun addNote(note: Note) {
         notes.add(0, note)
         notifyItemInserted(0)

@@ -24,7 +24,7 @@ class Cache {
         _notes?.add(note)
     }
 
-    fun removeNotes(notes: List<Note>) = _notes?.removeAll(notes)
+    fun removeNote(note: Note) = _notes?.remove(note)
 
     fun updateNote(oldNote: Note, updatedNote: Note) {
         val index = _notes?.indexOf(oldNote) ?: return

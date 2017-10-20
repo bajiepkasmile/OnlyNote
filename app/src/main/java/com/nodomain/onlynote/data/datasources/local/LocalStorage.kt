@@ -10,7 +10,7 @@ class LocalStorage {
 
     fun addNote(note: Note): Nothing = TODO()
 
-    fun removeNotes(notes: List<Note>): Nothing = TODO()
+    fun removeNote(note: Note): Nothing = TODO()
 
     fun updateNote(oldNote: Note, updatedNote: Note): Nothing = TODO()
 }

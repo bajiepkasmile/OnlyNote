@@ -18,15 +18,15 @@ class GetNotesInteractor(
     override fun execute(args: Void?) {
         if (repository.hasCachedNotes) {
             val notes = repository.getNotes(DataSourceType.CACHE)
-            postStickyEvent(GetNotesSuccessEvent(notes))
+            postStickyEvent(GetNotesSuccessEvent(notes.toMutableList()))
             return
         }
 
         inBackground {
             val notes = repository.getNotes(DataSourceType.LOCAL)
-            onMainThread { postStickyEvent(GetNotesSuccessEvent(notes)) }
+            onMainThread { postStickyEvent(GetNotesSuccessEvent(notes.toMutableList())) }
         }
     }
 }
 
-class GetNotesSuccessEvent(val notes: List<Note>)
+class GetNotesSuccessEvent(val notes: MutableList<Note>)

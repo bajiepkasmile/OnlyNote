@@ -3,8 +3,8 @@ package com.nodomain.onlynote.mvp.presenterimpls
 
 import com.nodomain.onlynote.domain.interactors.GetNotesInteractor
 import com.nodomain.onlynote.domain.interactors.GetNotesSuccessEvent
-import com.nodomain.onlynote.domain.interactors.RemoveNotesInteractor
-import com.nodomain.onlynote.domain.interactors.RemoveNotesSuccessEvent
+import com.nodomain.onlynote.domain.interactors.RemoveNoteInteractor
+import com.nodomain.onlynote.domain.interactors.RemoveNoteSuccessEvent
 import com.nodomain.onlynote.model.Note
 import com.nodomain.onlynote.mvp.presenters.NoteListMvpPresenter
 import com.nodomain.onlynote.mvp.views.NoteListMvpView
@@ -15,7 +15,7 @@ import org.greenrobot.eventbus.Subscribe
 class NoteListMvpPresenterImpl(
         eventBus: EventBus,
         private val getNotesInteractor: GetNotesInteractor,
-        private val removeNotesInteractor: RemoveNotesInteractor)
+        private val removeNoteInteractor: RemoveNoteInteractor)
     : BaseMvpPresenterImpl<NoteListMvpView>(eventBus), NoteListMvpPresenter {
 
     override fun getNotes() {
@@ -30,9 +30,8 @@ class NoteListMvpPresenterImpl(
         mvpView?.navigateToNoteDetailsView(null)
     }
 
-    //TODO: change to removeNote(note: Note)
-    override fun removeNotes(notes: List<Note>) {
-        removeNotesInteractor.execute(notes)
+    override fun removeNote(note: Note) {
+        removeNoteInteractor.execute(note)
     }
 
     override fun findNotes(keyStr: String) {
@@ -42,10 +41,11 @@ class NoteListMvpPresenterImpl(
     @Subscribe
     fun onGetNotesSuccess(event: GetNotesSuccessEvent) {
         mvpView?.showNotes(event.notes)
+        removeStickyEvent(event)
     }
 
     @Subscribe
-    fun onRemoveNotesSuccess(event: RemoveNotesSuccessEvent) {
-
+    fun onRemoveNoteSuccess(event: RemoveNoteSuccessEvent) {
+        removeStickyEvent(event)
     }
 }
