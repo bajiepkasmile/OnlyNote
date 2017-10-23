@@ -9,27 +9,45 @@ class Cache {
     private var _notes: MutableList<Note>? = null
 
     var notes: List<Note>
-        get() = _notes?.toList() ?: emptyList()
+        get() {
+            synchronized(this) {
+                return _notes?.toList() ?: emptyList()
+            }
+        }
 
         set(value) {
-            _notes = value.toMutableList()
+            synchronized(this) {
+                _notes = value.toMutableList()
+            }
         }
 
     val hasNotes: Boolean
-        get() = _notes != null
+        get() {
+            synchronized(this) {
+                return _notes != null
+            }
+        }
 
     fun addNote(note: Note) {
-        if (_notes == null)
-            _notes = ArrayList()
-        _notes?.add(note)
+        synchronized(this) {
+            if (_notes == null)
+                _notes = ArrayList()
+            _notes?.add(note)
+        }
     }
 
-    fun removeNote(note: Note) = _notes?.remove(note)
+    fun removeNote(note: Note) {
+        synchronized(this) {
+            _notes?.remove(note)
+        }
+    }
 
-    fun updateNote(oldNote: Note, updatedNote: Note) {
-        val index = _notes?.indexOf(oldNote) ?: return
+    fun updateNote(updatedNote: Note) {
+        synchronized(this) {
+            val index = _notes?.indexOf(updatedNote) ?: return
 
-        if (index != -1)
-            _notes?.set(index, updatedNote)
+            if (index != -1)
+                _notes?.set(index, updatedNote)
+        }
     }
 }

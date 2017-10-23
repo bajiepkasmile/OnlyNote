@@ -34,6 +34,9 @@ dependencies {
     implementation 'com.android.support.constraint:constraint-layout:1.1.0-beta3'
 
     implementation 'org.greenrobot:eventbus:3.0.0'
+    implementation 'nl.qbusict:cupboard:2.2.0'
+    implementation 'nl.littlerobots.cupboard-tools:provider:0.3.1'
+    implementation 'nl.littlerobots.cupboard-tools:gson:0.3.1'
 
     testImplementation 'junit:junit:4.12'
 

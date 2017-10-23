@@ -35,7 +35,7 @@ class NoteListMvpPresenterImpl(
     }
 
     override fun findNotes(keyStr: String) {
-        TODO()
+        TODO("not implemented")
     }
 
     @Subscribe

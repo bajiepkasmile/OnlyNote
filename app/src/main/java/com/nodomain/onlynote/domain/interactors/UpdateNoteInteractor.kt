@@ -20,13 +20,10 @@ class UpdateNoteInteractor(
     : BaseInteractor<UpdateNoteArgs>(executorService, mainThreadHandler, eventBus) {
 
     override fun execute(args: UpdateNoteArgs) {
-        val updatedNote = Note(timeUtil.currentTime, args.newText, args.newAttachments)
-
-        repository.updateNote(DataSourceType.CACHE, args.oldNote, updatedNote)
-
         inBackground {
-            repository.updateNote(DataSourceType.LOCAL, args.oldNote, updatedNote)
-            onMainThread { postStickyEvent(UpdateNoteSuccessEvent(args.oldNote, updatedNote)) }
+            val updatedNote = Note(args.oldNote.id, timeUtil.currentTime, args.newText, args.newAttachments)
+            repository.updateNote(updatedNote)
+            onMainThread { postStickyEvent(UpdateNoteSuccessEvent(updatedNote)) }
         }
     }
 }
@@ -36,4 +33,4 @@ class UpdateNoteArgs(
         val newText: String,
         val newAttachments: List<Attachment>)
 
-class UpdateNoteSuccessEvent(val oldNote: Note, val updatedNote: Note)
+class UpdateNoteSuccessEvent(val updatedNote: Note)

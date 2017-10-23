@@ -16,10 +16,8 @@ class RemoveNoteInteractor(
         private val repository: Repository) : BaseInteractor<Note>(executorService, mainThreadHandler, eventBus) {
 
     override fun execute(args: Note) {
-        repository.removeNotes(DataSourceType.CACHE, args)
-
         inBackground {
-            repository.removeNotes(DataSourceType.LOCAL, args)
+            repository.removeNote(args)
             onMainThread { postStickyEvent(RemoveNoteSuccessEvent(args)) }
         }
     }

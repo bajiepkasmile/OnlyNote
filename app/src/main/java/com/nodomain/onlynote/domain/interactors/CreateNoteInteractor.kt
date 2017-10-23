@@ -2,7 +2,6 @@ package com.nodomain.onlynote.domain.interactors
 
 
 import android.os.Handler
-import com.nodomain.onlynote.data.datasources.DataSourceType
 import com.nodomain.onlynote.data.repository.Repository
 import com.nodomain.onlynote.model.Attachment
 import com.nodomain.onlynote.model.Note
@@ -11,7 +10,7 @@ import org.greenrobot.eventbus.EventBus
 import java.util.concurrent.ExecutorService
 
 
-class AddNoteInteractor(
+class CreateNoteInteractor(
         executorService: ExecutorService,
         mainThreadHandler: Handler,
         eventBus: EventBus,
@@ -20,11 +19,8 @@ class AddNoteInteractor(
     : BaseInteractor<AddNoteArgs>(executorService, mainThreadHandler, eventBus) {
 
     override fun execute(args: AddNoteArgs) {
-        val newNote = Note(timeUtil.currentTime, args.text, args.attachments)
-        repository.addNote(DataSourceType.CACHE, newNote)
-
         inBackground {
-            repository.addNote(DataSourceType.LOCAL, newNote)
+            val newNote = repository.createNote(timeUtil.currentTime, args.text, args.attachments)
             onMainThread { postStickyEvent(AddNoteSuccessEvent(newNote)) }
         }
     }

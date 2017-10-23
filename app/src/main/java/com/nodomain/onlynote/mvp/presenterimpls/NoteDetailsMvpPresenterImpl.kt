@@ -13,7 +13,7 @@ import org.greenrobot.eventbus.Subscribe
 
 class NoteDetailsMvpPresenterImpl(
         eventBus: EventBus,
-        private val addNoteInteractor: AddNoteInteractor,
+        private val createNoteInteractor: CreateNoteInteractor,
         private val updateNoteInteractor: UpdateNoteInteractor,
         private val removeNoteInteractor: RemoveNoteInteractor,
         private val noteValidator: NoteValidator)
@@ -81,7 +81,7 @@ class NoteDetailsMvpPresenterImpl(
         if (dataIsEmpty)
             mvpView?.navigateToPreviousView()
         else {
-            addNoteInteractor.execute(AddNoteArgs(newText, newAttachments))
+            createNoteInteractor.execute(AddNoteArgs(newText, newAttachments))
             mvpView?.showProgress()
         }
     }
