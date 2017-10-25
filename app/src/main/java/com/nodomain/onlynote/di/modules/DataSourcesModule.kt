@@ -1,10 +1,9 @@
 package com.nodomain.onlynote.di.modules
 
 
-import android.content.Context
 import com.nodomain.onlynote.data.datasources.cache.Cache
 import com.nodomain.onlynote.data.datasources.local.LocalStorage
-import com.nodomain.onlynote.data.datasources.local.impl.DbHelper
+import data.datasources.local.LocalStorageImpl
 import dagger.Module
 import dagger.Provides
 import javax.inject.Singleton
@@ -15,11 +14,7 @@ class DataSourcesModule {
 
     @Provides
     @Singleton
-    fun provideDbHelper(context: Context) = DbHelper(context)
-
-    @Provides
-    @Singleton
-    fun provideLocalStorage(dbHelper: DbHelper) = LocalStorage(dbHelper)
+    fun provideLocalStorage(localStorageImpl: LocalStorageImpl): LocalStorage = localStorageImpl
 
     @Provides
     @Singleton

@@ -1,7 +1,5 @@
 <resources>
 	
-	<string name="app_name">OnlyNote</string>
-	
 	<string name="dialog_title_confirm_cancellation">Отменить изменения</string>
 	<string name="dialog_message_confirm_cancellation">Изменения не будут сохранены</string>
 	<string name="dialog_title_delete_empty_note">Запись пуста</string>
