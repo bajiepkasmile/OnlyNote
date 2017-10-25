@@ -41,8 +41,8 @@ class NoteListMvpPresenterImpl @Inject constructor(
 
     @Subscribe
     fun onGetNotesSuccess(event: GetNotesSuccessEvent) {
-        mvpView?.showNotes(event.notes)
         removeStickyEvent(event)
+        mvpView?.showNotes(event.notes)
     }
 
     @Subscribe

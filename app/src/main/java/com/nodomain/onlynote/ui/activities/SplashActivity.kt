@@ -27,6 +27,7 @@ class SplashActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         app.applicationComponent.inject(this)
 
+        //Need to do this in advance to load the notes from db into the cache
         eventBus.register(this)
         getNotesInteractor.execute(null)
     }
@@ -38,6 +39,8 @@ class SplashActivity : AppCompatActivity() {
 
     @Subscribe
     fun onGetNotesSuccess(event: GetNotesSuccessEvent) {
+        eventBus.removeStickyEvent(event)
+
         startActivity(Intent(this, MainActivity::class.java))
         finish()
     }

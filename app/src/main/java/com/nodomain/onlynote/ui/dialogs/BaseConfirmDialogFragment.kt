@@ -13,7 +13,6 @@ abstract class BaseConfirmDialogFragment<L> : DialogFragment() {
 
     protected abstract val titleId: Int
     protected abstract val messageId: Int
-    protected abstract val listenerClassQualifiedName: String?
 
     protected var listener: L? = null
 
@@ -39,7 +38,8 @@ abstract class BaseConfirmDialogFragment<L> : DialogFragment() {
         try {
             listener = parentFragment as L
         } catch (e: ClassCastException) {
-            throw ClassCastException(parentFragment.toString() + " must implement " + listenerClassQualifiedName)
+            throw ClassCastException(parentFragment.toString()
+                    + " does not implement the required listener interface")
         }
     }
 }

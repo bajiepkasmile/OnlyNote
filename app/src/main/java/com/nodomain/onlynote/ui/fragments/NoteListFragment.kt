@@ -21,8 +21,8 @@ class NoteListFragment : BaseMvpFragment<NoteListMvpView, NoteListMvpPresenter>(
     private val NoteListFragment.mainActivity: MainActivity
         get() = activity as MainActivity
 
-    private val rvNotes: RecyclerView = activity.findViewById(R.id.rv_notes)
-    private val fabAddNote: FloatingActionButton = activity.findViewById(R.id.fab_add_note)
+    private var rvNotes: RecyclerView? = null// = activity.findViewById(R.id.rv_notes)
+    private var fabAddNote: FloatingActionButton? = null// = activity.findViewById(R.id.fab_add_note)
 
     private var notesAdapter: NotesAdapter? = null
 
@@ -40,20 +40,10 @@ class NoteListFragment : BaseMvpFragment<NoteListMvpView, NoteListMvpPresenter>(
         return inflater?.inflate(R.layout.fragment_note_list, container, false)
     }
 
-    override fun onViewCreated(view: View?, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-        mvpPresenter.attachMvpView(this)
-    }
-
-    override fun onDestroyView() {
-        mvpPresenter.detachMvpView()
-        super.onDestroyView()
-    }
-
     override fun showNotes(notes: MutableList<Note>) {
         if (notesAdapter == null) {
             notesAdapter = NotesAdapter(notes)
-            rvNotes.adapter = notesAdapter
+            rvNotes?.adapter = notesAdapter
         } else
             notesAdapter?.setNotes(notes)
     }

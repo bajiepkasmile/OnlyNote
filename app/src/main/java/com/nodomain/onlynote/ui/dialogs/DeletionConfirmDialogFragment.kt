@@ -9,7 +9,6 @@ class DeletionConfirmDialogFragment : BaseConfirmDialogFragment<DeletionDialogRe
 
     override val titleId: Int = R.string.dialog_title_delete_empty_note
     override val messageId: Int = R.string.dialog_message_delete_empty_note
-    override val listenerClassQualifiedName: String? = DeletionDialogResultListener::class.qualifiedName
 
     override fun onAccept() {
         listener?.onDeletionAccept()

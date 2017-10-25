@@ -60,20 +60,20 @@ class NoteDetailsMvpPresenterImpl @Inject constructor(
 
     @Subscribe
     fun onAddNoteSuccess(event: AddNoteSuccessEvent) {
-        mvpView?.navigateToPreviousView()
         removeStickyEvent(event)
+        mvpView?.navigateToPreviousView()
     }
 
     @Subscribe
     fun onUpdateNoteSuccess(event: UpdateNoteSuccessEvent) {
-        mvpView?.navigateToPreviousView()
         removeStickyEvent(event)
+        mvpView?.navigateToPreviousView()
     }
 
     @Subscribe
     fun onRemoveNoteSuccess(event: RemoveNoteSuccessEvent) {
-        mvpView?.navigateToPreviousView()
         removeStickyEvent(event)
+        mvpView?.navigateToPreviousView()
     }
 
     private fun saveNewNote(newText: String, newAttachments: List<Attachment>) {

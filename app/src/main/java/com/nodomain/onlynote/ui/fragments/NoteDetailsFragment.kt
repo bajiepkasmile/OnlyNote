@@ -8,7 +8,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
-import com.nodomain.onlynote.App
 import com.nodomain.onlynote.R
 import com.nodomain.onlynote.model.Note
 import com.nodomain.onlynote.mvp.presenters.NoteDetailsMvpPresenter
@@ -54,16 +53,6 @@ class NoteDetailsFragment : BaseMvpFragment<NoteDetailsMvpView,
     override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         mainActivity.mainActivitySubComponent.inject(this)
         return inflater?.inflate(R.layout.fragment_note_details, container, false)
-    }
-
-    override fun onViewCreated(view: View?, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-        mvpPresenter.attachMvpView(this)
-    }
-
-    override fun onDestroyView() {
-        mvpPresenter.detachMvpView()
-        super.onDestroyView()
     }
 
     override fun showNote(note: Note) {
