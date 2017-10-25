@@ -2,16 +2,16 @@ package com.nodomain.onlynote.domain.interactors
 
 
 import android.os.Handler
-import com.nodomain.onlynote.data.datasources.DataSourceType
 import com.nodomain.onlynote.data.repository.Repository
 import com.nodomain.onlynote.model.Attachment
 import com.nodomain.onlynote.model.Note
 import com.nodomain.onlynote.utils.TimeUtil
 import org.greenrobot.eventbus.EventBus
 import java.util.concurrent.ExecutorService
+import javax.inject.Inject
 
 
-class UpdateNoteInteractor(
+class UpdateNoteInteractor @Inject constructor(
         executorService: ExecutorService,
         mainThreadHandler: Handler,
         eventBus: EventBus,

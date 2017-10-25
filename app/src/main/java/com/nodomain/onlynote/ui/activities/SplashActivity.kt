@@ -1,28 +1,38 @@
 package com.nodomain.onlynote.ui.activities
 
 
+import android.app.Activity
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import com.nodomain.onlynote.domain.interactors.GetNotesInteractor
 import com.nodomain.onlynote.domain.interactors.GetNotesSuccessEvent
 import org.greenrobot.eventbus.Subscribe
 import android.content.Intent
+import com.nodomain.onlynote.App
 import org.greenrobot.eventbus.EventBus
+import javax.inject.Inject
 
 
 class SplashActivity : AppCompatActivity() {
 
-    var getNotesInteractor: GetNotesInteractor? = null
-    var eventBus: EventBus? = null
+    private val Activity.app: App
+        get() = application as App
+
+    @Inject
+    lateinit var getNotesInteractor: GetNotesInteractor
+    @Inject
+    lateinit var eventBus: EventBus
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        eventBus?.register(this)
-        getNotesInteractor?.execute(null)
+        app.applicationComponent.inject(this)
+
+        eventBus.register(this)
+        getNotesInteractor.execute(null)
     }
 
     override fun onDestroy() {
-        eventBus?.unregister(this)
+        eventBus.unregister(this)
         super.onDestroy()
     }
 

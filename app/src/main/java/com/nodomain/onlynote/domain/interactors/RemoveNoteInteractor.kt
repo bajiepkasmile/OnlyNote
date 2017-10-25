@@ -2,14 +2,14 @@ package com.nodomain.onlynote.domain.interactors
 
 
 import android.os.Handler
-import com.nodomain.onlynote.data.datasources.DataSourceType
 import com.nodomain.onlynote.data.repository.Repository
 import com.nodomain.onlynote.model.Note
 import org.greenrobot.eventbus.EventBus
 import java.util.concurrent.ExecutorService
+import javax.inject.Inject
 
 
-class RemoveNoteInteractor(
+class RemoveNoteInteractor @Inject constructor(
         executorService: ExecutorService,
         mainThreadHandler: Handler,
         eventBus: EventBus,

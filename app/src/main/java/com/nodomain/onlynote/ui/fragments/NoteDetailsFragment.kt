@@ -4,13 +4,17 @@ package com.nodomain.onlynote.ui.fragments
 import android.os.Bundle
 import android.support.design.widget.FloatingActionButton
 import android.support.v7.widget.RecyclerView
+import android.view.LayoutInflater
 import android.view.View
+import android.view.ViewGroup
 import android.widget.TextView
+import com.nodomain.onlynote.App
 import com.nodomain.onlynote.R
 import com.nodomain.onlynote.model.Note
 import com.nodomain.onlynote.mvp.presenters.NoteDetailsMvpPresenter
 import com.nodomain.onlynote.mvp.views.NoteDetailsMvpView
 import com.nodomain.onlynote.navigation.NoteDetailsNavigator
+import com.nodomain.onlynote.ui.activities.MainActivity
 import com.nodomain.onlynote.ui.dialogs.CancellationConfirmDialogFragment
 import com.nodomain.onlynote.ui.dialogs.DeletionConfirmDialogFragment
 import com.nodomain.onlynote.ui.listeners.CancellationDialogResultListener
@@ -20,6 +24,9 @@ import com.nodomain.onlynote.ui.listeners.DeletionDialogResultListener
 class NoteDetailsFragment : BaseMvpFragment<NoteDetailsMvpView,
         NoteDetailsMvpPresenter>(), NoteDetailsMvpView,
         CancellationDialogResultListener, DeletionDialogResultListener {
+
+    private val NoteDetailsFragment.mainActivity: MainActivity
+        get() = activity as MainActivity
 
     private val tvText: TextView = activity.findViewById(R.id.tv_text)
     private val fabAddAttachment: FloatingActionButton = activity.findViewById(R.id.fab_add_attachment)
@@ -44,13 +51,18 @@ class NoteDetailsFragment : BaseMvpFragment<NoteDetailsMvpView,
         }
     }
 
+    override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+        mainActivity.mainActivitySubComponent.inject(this)
+        return inflater?.inflate(R.layout.fragment_note_details, container, false)
+    }
+
     override fun onViewCreated(view: View?, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        mvpPresenter?.attachMvpView(this)
+        mvpPresenter.attachMvpView(this)
     }
 
     override fun onDestroyView() {
-        mvpPresenter?.detachMvpView()
+        mvpPresenter.detachMvpView()
         super.onDestroyView()
     }
 
@@ -81,18 +93,18 @@ class NoteDetailsFragment : BaseMvpFragment<NoteDetailsMvpView,
     }
 
     override fun onCancellationAccept() {
-        mvpPresenter?.acceptChangesCancellation()
+        mvpPresenter.acceptChangesCancellation()
     }
 
     override fun onCancellationCancel() {
-        mvpPresenter?.cancelChangesCancellation()
+        mvpPresenter.cancelChangesCancellation()
     }
 
     override fun onDeletionAccept() {
-        mvpPresenter?.acceptNoteDeletion()
+        mvpPresenter.acceptNoteDeletion()
     }
 
     override fun onDeletionCancel() {
-        mvpPresenter?.cancelNoteDeletion()
+        mvpPresenter.cancelNoteDeletion()
     }
 }

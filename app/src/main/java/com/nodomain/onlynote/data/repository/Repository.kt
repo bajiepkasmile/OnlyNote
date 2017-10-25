@@ -6,9 +6,12 @@ import com.nodomain.onlynote.data.datasources.cache.Cache
 import com.nodomain.onlynote.data.datasources.local.LocalStorage
 import com.nodomain.onlynote.model.Attachment
 import com.nodomain.onlynote.model.Note
+import javax.inject.Inject
 
 
-class Repository(val localStorage: LocalStorage, val cache: Cache) {
+class Repository @Inject constructor(
+        private val localStorage: LocalStorage,
+        private val cache: Cache) {
 
     val hasCachedNotes: Boolean
         get() = cache.hasNotes

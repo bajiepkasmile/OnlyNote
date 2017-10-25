@@ -3,9 +3,10 @@ package com.nodomain.onlynote.utils
 
 import com.nodomain.onlynote.model.Attachment
 import com.nodomain.onlynote.model.Note
+import javax.inject.Inject
 
 
-class NoteValidator {
+class NoteValidator @Inject constructor() {
 
     fun checkDataIsEmpty(text: String, attachments: List<Attachment>)
             = text.isEmpty() && attachments.isEmpty()

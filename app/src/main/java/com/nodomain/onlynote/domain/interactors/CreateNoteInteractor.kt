@@ -8,9 +8,10 @@ import com.nodomain.onlynote.model.Note
 import com.nodomain.onlynote.utils.TimeUtil
 import org.greenrobot.eventbus.EventBus
 import java.util.concurrent.ExecutorService
+import javax.inject.Inject
 
 
-class CreateNoteInteractor(
+class CreateNoteInteractor @Inject constructor(
         executorService: ExecutorService,
         mainThreadHandler: Handler,
         eventBus: EventBus,

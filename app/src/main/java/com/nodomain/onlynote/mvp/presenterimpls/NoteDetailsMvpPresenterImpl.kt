@@ -9,9 +9,10 @@ import com.nodomain.onlynote.mvp.views.NoteDetailsMvpView
 import com.nodomain.onlynote.utils.NoteValidator
 import org.greenrobot.eventbus.EventBus
 import org.greenrobot.eventbus.Subscribe
+import javax.inject.Inject
 
 
-class NoteDetailsMvpPresenterImpl(
+class NoteDetailsMvpPresenterImpl @Inject constructor(
         eventBus: EventBus,
         private val createNoteInteractor: CreateNoteInteractor,
         private val updateNoteInteractor: UpdateNoteInteractor,

@@ -7,9 +7,10 @@ import com.nodomain.onlynote.data.repository.Repository
 import com.nodomain.onlynote.model.Note
 import org.greenrobot.eventbus.EventBus
 import java.util.concurrent.ExecutorService
+import javax.inject.Inject
 
 
-class GetNotesInteractor(
+class GetNotesInteractor @Inject constructor(
         executorService: ExecutorService,
         mainThreadHandler: Handler,
         eventBus: EventBus,
