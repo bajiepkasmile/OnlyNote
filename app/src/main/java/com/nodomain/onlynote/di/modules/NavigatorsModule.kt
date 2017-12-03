@@ -1,9 +1,9 @@
 package com.nodomain.onlynote.di.modules
 
 
-import com.nodomain.onlynote.navigation.MainNavigator
-import com.nodomain.onlynote.navigation.NoteDetailsNavigator
-import com.nodomain.onlynote.navigation.NoteListNavigator
+import com.nodomain.onlynote.presentation.navigation.MainNavigator
+import com.nodomain.onlynote.presentation.navigation.NoteDetailsNavigator
+import com.nodomain.onlynote.presentation.navigation.NoteListNavigator
 import dagger.Module
 import dagger.Provides
 

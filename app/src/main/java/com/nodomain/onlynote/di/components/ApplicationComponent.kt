@@ -5,17 +5,14 @@ import com.nodomain.onlynote.App
 import com.nodomain.onlynote.di.modules.ApplicationModule
 import com.nodomain.onlynote.di.modules.DataSourcesModule
 import com.nodomain.onlynote.di.modules.MainActivityModule
-import com.nodomain.onlynote.ui.activities.SplashActivity
+import com.nodomain.onlynote.presentation.ui.activities.SplashActivity
 import dagger.Component
 import javax.inject.Singleton
 
 
 @Singleton
 @Component(
-        modules = arrayOf(
-            ApplicationModule::class,
-            DataSourcesModule::class
-        )
+        modules = [ApplicationModule::class, DataSourcesModule::class]
 )
 interface ApplicationComponent {
 

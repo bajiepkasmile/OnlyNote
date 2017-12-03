@@ -2,7 +2,7 @@ package com.nodomain.onlynote.di.modules
 
 
 import com.nodomain.onlynote.di.scopes.PerActivity
-import com.nodomain.onlynote.navigation.MainNavigator
+import com.nodomain.onlynote.presentation.navigation.MainNavigator
 import dagger.Module
 import dagger.Provides
 
