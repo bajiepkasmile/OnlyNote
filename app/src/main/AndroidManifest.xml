@@ -12,14 +12,14 @@
 		android:supportsRtl="true"
 		>
 		
-		<activity android:name=".ui.activities.SplashActivity">
+		<activity android:name="com.nodomain.onlynote.presentation.ui.activities.SplashActivity">
 			<intent-filter>
 				<category android:name="android.intent.category.LAUNCHER"/>
 				<action android:name="android.intent.action.MAIN"/>
 			</intent-filter>
 		</activity>
 		
-		<activity android:name=".ui.activities.MainActivity"/>
+		<activity android:name="com.nodomain.onlynote.presentation.ui.activities.MainActivity"/>
 		
 	</application>
 	
