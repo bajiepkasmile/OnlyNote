@@ -3,12 +3,6 @@ apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
 apply plugin: 'kotlin-kapt'
 
-ext {
-    support_library_version = '26.1.0'
-    cupboard_tools_version = '0.3.1'
-    dagger_version = '2.12'
-}
-
 android {
     compileSdkVersion 26
     buildToolsVersion "26.0.2"
@@ -21,6 +15,9 @@ android {
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
     buildTypes {
+        mock {
+            applicationIdSuffix ".mock"
+        }
         debug {
             applicationIdSuffix ".debug"
         }
@@ -32,6 +29,11 @@ android {
     }
 }
 
+ext {
+    support_library_version = '26.1.0'
+    dagger_version = '2.12'
+}
+
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
 
@@ -41,16 +43,12 @@ dependencies {
     implementation "com.android.support:appcompat-v7:$support_library_version"
     implementation "com.android.support:design:$support_library_version"
     implementation "com.android.support:recyclerview-v7:$support_library_version"
-    implementation 'com.android.support.constraint:constraint-layout:1.1.0-beta3'
-
-    implementation 'org.greenrobot:eventbus:3.0.0'
-
-    implementation 'nl.qbusict:cupboard:2.2.0'
-    implementation "nl.littlerobots.cupboard-tools:provider:$cupboard_tools_version"
-    implementation "nl.littlerobots.cupboard-tools:gson:$cupboard_tools_version"
+    implementation "com.android.support.constraint:constraint-layout:1.1.0-beta3"
 
     kapt "com.google.dagger:dagger-compiler:$dagger_version"
     implementation "com.google.dagger:dagger:$dagger_version"
+
+    implementation "org.greenrobot:eventbus:3.0.0"
 
     testImplementation 'junit:junit:4.12'
 
