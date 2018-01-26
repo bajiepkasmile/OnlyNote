@@ -1,26 +1,25 @@
-package data.datasources.local.impl
+package com.nodomain.onlynote.data.datasources.local
 
 
-import com.nodomain.onlynote.data.datasources.local.LocalStorage
 import com.nodomain.onlynote.model.Note
 import javax.inject.Inject
 
 
-class LocalStorageImpl @Inject constructor() : LocalStorage {
+class LocalStorageImpl @Inject constructor(): LocalStorage {
 
     override fun getNotes(): List<Note> {
-        TODO()
+        TODO("not implemented")
     }
 
     override fun addNote(note: Note) {
-        TODO()
+        TODO("not implemented")
     }
 
     override fun removeNote(note: Note) {
-        TODO()
+        TODO("not implemented")
     }
 
     override fun updateNote(note: Note) {
-        TODO()
+        TODO("not implemented")
     }
 }

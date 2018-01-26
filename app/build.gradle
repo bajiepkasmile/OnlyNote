@@ -1,11 +1,13 @@
-apply plugin: 'com.android.application'
-apply plugin: 'kotlin-android'
-apply plugin: 'kotlin-android-extensions'
-apply plugin: 'kotlin-kapt'
+apply plugin: "com.android.application"
+apply plugin: "kotlin-android"
+apply plugin: "kotlin-android-extensions"
+apply plugin: "kotlin-kapt"
+
 
 android {
     compileSdkVersion 26
     buildToolsVersion "26.0.2"
+
     defaultConfig {
         applicationId "com.nodomain.onlynote"
         minSdkVersion 15
@@ -14,6 +16,7 @@ android {
         versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
+
     buildTypes {
         mock {
             applicationIdSuffix ".mock"
@@ -27,15 +30,33 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
+
+    sourceSets {
+        debug {
+            java.srcDirs += "src/debugRelease/java"
+        }
+        release {
+            java.srcDirs += "src/debugRelease/java"
+        }
+    }
+
+    configurations {
+        debugReleaseImplementation
+
+        debugImplementation.extendsFrom(debugReleaseImplementation)
+        releaseImplementation.extendsFrom(debugReleaseImplementation)
+    }
 }
+
 
 ext {
-    support_library_version = '26.1.0'
-    dagger_version = '2.12'
+    support_library_version = "26.1.0"
+    dagger_version = "2.12"
 }
 
+
 dependencies {
-    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation fileTree(dir: "libs", include: ["*.jar"])
 
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jre7:$kotlin_version"
     implementation "org.jetbrains.kotlin:kotlin-reflect:$kotlin_version"
@@ -43,16 +64,19 @@ dependencies {
     implementation "com.android.support:appcompat-v7:$support_library_version"
     implementation "com.android.support:design:$support_library_version"
     implementation "com.android.support:recyclerview-v7:$support_library_version"
-    implementation "com.android.support.constraint:constraint-layout:1.1.0-beta3"
+    implementation "com.android.support.constraint:constraint-layout:1.1.0-beta4"
 
     kapt "com.google.dagger:dagger-compiler:$dagger_version"
     implementation "com.google.dagger:dagger:$dagger_version"
 
     implementation "org.greenrobot:eventbus:3.0.0"
 
-    testImplementation 'junit:junit:4.12'
+    debugReleaseImplementation "android.arch.persistence.room:runtime:1.0.0"
+    annotationProcessor "android.arch.persistence.room:compiler:1.0.0"
 
-    androidTestImplementation('com.android.support.test.espresso:espresso-core:3.0.1', {
-        exclude group: 'com.android.support', module: 'support-annotations'
+    testImplementation "junit:junit:4.12"
+
+    androidTestImplementation("com.android.support.test.espresso:espresso-core:3.0.1", {
+        exclude group: "com.android.support", module: "support-annotations"
     })
 }

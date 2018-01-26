@@ -1,15 +1,16 @@
-package data.datasources.local
+package com.nodomain.onlynote.data.datasources.local.impl
 
 
 import com.nodomain.onlynote.data.datasources.local.LocalStorage
 import com.nodomain.onlynote.model.Note
+import data.datasources.local.impl.NoteGenerator
 import java.util.concurrent.CopyOnWriteArrayList
 import javax.inject.Inject
 
 
 class LocalStorageImpl @Inject constructor() : LocalStorage {
 
-    private val notes = CopyOnWriteArrayList(NoteGenerator().generateNotes(3))
+    private val notes = CopyOnWriteArrayList(NoteGenerator().generateNoteList(3))
 
     override fun getNotes() = notes.toList()
 
